@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <title> Python Reddit Bot - Share to Subreddit </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="{{url_for('static', filename='bootstrap.min.css')}}" rel="stylesheet" media="screen">
+    </head>
+    <body>
+        <div class="container">
+            <h1>Share to Subreddit</h1>
+            <br>
+            <form method="post" enctype="multipart/form-data">
+                <input type="text" placeholder="title" name="title" value="{{ request.form.title }}">
+                <input type="text" placeholder="url" name="url" value="{{ request.form.url }}">
+                <input type="text" placeholder="subreddit" name="subreddit" value="{{ request.form.subreddit }}">
+                <input type="submit">
+            </form>
+            {% if error %}
+                <p class="error"><strong>Error:</strong> {{ error }}</p>
+            {% endif %}
+            {% if response %}
+                <p class="error"><strong>Response:</strong> {{ response }}</p>
+            {% endif %}
+        </div>
+    </body>
+</html>

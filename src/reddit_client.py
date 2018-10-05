@@ -3,10 +3,11 @@ from praw import Reddit
 class Reddit_Client(object):
     def __init__(self):
         self.reddit_client = Reddit(client_id='-wWMNrpYtVcwWg', client_secret='3Uyzxf4Fll0cAEItawlyoSscdsw', username='toodopestyll', password='dabura45', user_agent="python-reddit-LoS:v0.1 by /u/toodopestyll")
+        self.paran_client = Reddit(client_id='-wWMNrpYtVcwWg', client_secret='3Uyzxf4Fll0cAEItawlyoSscdsw', username='LeagueofSavages1', password='21savageha', user_agent="python-reddit-LoS:v0.1 by /u/LeagueofSavages1")
 
     def print_self(self):
         try:
-            return str(self.reddit_client.user.me())
+            return str(self.reddit_client.user.me()) + ' and ' + str(self.paran_client.user.me())
         except Exception as e:
             return("Error! Failed to login to Reddit! Please double check credentials! \n %s" % (e))
 

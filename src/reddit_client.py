@@ -1,4 +1,5 @@
 from praw import Reddit
+from time import sleep
 
 class Reddit_Client(object):
     def __init__(self):
@@ -21,17 +22,26 @@ class Reddit_Client(object):
         if not account:
             return "Error! Please select the account to share this post with"
 
+        subredditList = [x.strip() for x in subreddit.split(',')]
+        new_posts_urls = []            
+
         if account == 'LeagueofSavages1':
-            try:
-                new_post = self.paran_client.subreddit(subreddit).submit(title=title, url=url)
-            except Exception as e:
-                return("Error! Failed to post! \n %s" % (e))
+            for subreddit in subredditList:
+                try:
+                    new_post = self.paran_client.subreddit(subreddit).submit(title=title, url=url)
+                except Exception as e:
+                    return("Error! Failed to post! \n %s" % (e))
+                new_posts_urls.append(str(new_post.permalink))
+                sleep(666)
         elif account == 'TooDopeStyll':
-            try:
-                new_post = self.reddit_client.subreddit(subreddit).submit(title=title, url=url)
-            except Exception as e:
-                return("Error! Failed to post! \n %s" % (e))
+            for subreddit in subredditList:
+                try:
+                    new_post = self.reddit_client.subreddit(subreddit).submit(title=title, url=url)
+                except Exception as e:
+                    return("Error! Failed to post! \n %s" % (e))
+                new_posts_urls.append(str(new_post.permalink))
+                sleep(666)
         else:
             return "Error! Invalid account name!"
 
-        return {"url": str(new_post.permalink)}
+        return dict(map(reversed, enumerate(new_posts_urls)))

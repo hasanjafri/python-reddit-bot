@@ -12,6 +12,10 @@
                 <input type="text" placeholder="title" name="title" value="{{ request.form.title }}">
                 <input type="text" placeholder="url" name="url" value="{{ request.form.url }}">
                 <input type="text" placeholder="subreddit" name="subreddit" value="{{ request.form.subreddit }}">
+                <select name="account">
+                    <option value="LeagueofSavages1">LeagueofSavages1</option>
+                    <option value="TooDopeStyll">TooDopeStyll</option>
+                </select>
                 <input type="submit">
             </form>
             {% if error %}

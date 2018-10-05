@@ -27,12 +27,15 @@ def post_to_subreddit():
             error = "No subreddit provided to post this to"
         if 'url' not in request.form:
             error = "No url provided to share in this post"
+        if 'account' not in request.form:
+            error = "No account selected to share this post with"
 
         title = request.form.get('title')
         url = request.form.get('url')
         subreddit = request.form.get('subreddit')
+        account = request.form.get('account')
 
-        res = reddit_bot_client.post_to_subreddit(title, url, subreddit)
+        res = reddit_bot_client.post_to_subreddit(title, url, subreddit, account)
         if isinstance(res, dict):
             response = res
         else:

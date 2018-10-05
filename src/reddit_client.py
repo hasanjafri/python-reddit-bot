@@ -11,17 +11,27 @@ class Reddit_Client(object):
         except Exception as e:
             return("Error! Failed to login to Reddit! Please double check credentials! \n %s" % (e))
 
-    def post_to_subreddit(self, title, url, subreddit):
+    def post_to_subreddit(self, title, url, subreddit, account):
         if not title:
             return "Error! Please provide a title for the post"
         if not url:
             return "Error! Please provide a YouTube URL for sharing"
         if not subreddit:
             return "Error! Please provide the name of the subreddit to make this post on"
+        if not account:
+            return "Error! Please select the account to share this post with"
 
-        try:
-            new_post = self.reddit_client.subreddit(subreddit).submit(title=title, url=url)
-        except Exception as e:
-            return("Error! Failed to post! \n %s" % (e))
+        if account == 'LeagueofSavages1':
+            try:
+                new_post = self.paran_client.subreddit(subreddit).submit(title=title, url=url)
+            except Exception as e:
+                return("Error! Failed to post! \n %s" % (e))
+        elif account == 'TooDopeStyll':
+            try:
+                new_post = self.reddit_client.subreddit(subreddit).submit(title=title, url=url)
+            except Exception as e:
+                return("Error! Failed to post! \n %s" % (e))
+        else:
+            return "Error! Invalid account name!"
 
         return {"url": str(new_post.permalink)}
